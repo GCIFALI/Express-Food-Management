@@ -56,17 +56,19 @@
                         <div>
                             <input id="SerialUserComp" name="SerialUserComp" type="hidden">
                             <input id="ProductID" name="ProductID" type="hidden">
-                            <button type="submit" value="Salvar"
-                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onclick="setSerial('<%=UserSerial%>', '<%=IDProduct%>')">Editar </button>
-                            <button type="button" value="Voltar"
-                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                onclick="window.location = '/produtos?serial=<%=UserSerial%>'">Cancelar</button>
+                            <input id="ACTIONTYPE" name="ACTIONTYPE" value="0" type="hidden">
+                            <button type="submit" value="Salvar"class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onclick="setSerial('<%=UserSerial%>', '<%=IDProduct%>')">Editar </button>
+                            <button type="button" value="Excluir"class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onclick="window.location = '/deletarproduto?id=<%=IDProduct%>'" >Excluir Produto</button>
+                            <button type="button" value="Voltar"class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"onclick="window.location = '/produtos?serial=<%=UserSerial%>'">Cancelar</button>
+                                
                         </div>
 
                         <script>
                             function setSerial(serial, ID) {
+                                document.getElementById("ACTIONTYPE").value = "1";
                                 document.getElementById("SerialUserComp").value = serial;
                                 document.getElementById("ProductID").value = ID;
+                                documento
 
                             }
                         </script>

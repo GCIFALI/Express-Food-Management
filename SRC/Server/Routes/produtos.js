@@ -14,7 +14,6 @@ module.exports = (app) => {
                 })
                 ProductsList.forEach(function(product){
                     product.ExpirationDate = product.ExpirationDate.toLocaleDateString()
-                    console.log(product.ExpirationDate);
                 } )
 
                 res.render('produtos.ejs', {SerialUser: UserSerial, Products: ProductsList});
@@ -39,7 +38,6 @@ module.exports = (app) => {
         var UserSerial = req.body.SerialUserComp
         
         if (ProductName !== null || ProductName !== "") {
-            console.log("aa1");
             const Products = require('../Schemas/Products');
             const Connection = require('../DB')()
     
@@ -55,10 +53,9 @@ module.exports = (app) => {
     app.post('/editarproduto', async (req, res) => {
         var NewProductName = req.body.novonomeproduto
         var NewExpirationDate = req.body.novavalidadeproduto
-        NewExpirationDate.toString()
-
         var UserSerial = req.body.SerialUserComp
         var ProductID = req.body.ProductID
+
         if (NewProductName !== null || NewProductName !== "") {
             const Products = require('../Schemas/Products');
             const Connection = require('../DB')()
@@ -67,6 +64,16 @@ module.exports = (app) => {
             })
         }
     })
+
+    app.get('/deletarproduto', async (req, res) => {
+        var ProductID = req.query.id
+        const Products = require('../Schemas/Products');
+        const Connection = require('../DB')()
+        await Products.findOne({_id: ProductID}).then(async (response) => {
+            await res.redirect(`/produtos?serial=${response.UserSerial}`)
+            await Products.deleteOne({_id: ProductID})
+        })
+    })  
 
     app.get('/produtosconsumidos', async (req, res) => {   
         var UserSerial = req.query.serial
@@ -123,7 +130,6 @@ module.exports = (app) => {
         var ProductID = req.query.id
         const Produtos = require('../Schemas/Products');
         await Produtos.findOneAndUpdate({_id: ProductID}, {Status: 1}).then(async (response) => {
-            console.log(response)
             res.redirect('back');
         })
     })
@@ -132,7 +138,6 @@ module.exports = (app) => {
         var ProductID = req.query.id
         const Produtos = require('../Schemas/Products');
         await Produtos.findOneAndUpdate({_id: ProductID}, {Status: 2}).then(async (response) => {
-            console.log(response)
             res.redirect('back');
         })
     })
