@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Website para AT",
   "main": "./SRC/app.js",
+  "scripts": {
+    "start": "node ./SRC/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "Guilherme Cifali",
   "license": "ISC",
   "dependencies": {
